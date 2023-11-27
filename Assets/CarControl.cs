@@ -5,7 +5,7 @@ using UnityEngine;
 public class CarControl : MonoBehaviour
 {
     float speed = 8f;
-    public float rotationSpeed = 2f;
+    public int rotationSpeed = 500;
 
     // Start is called before the first frame update
     void Start()
