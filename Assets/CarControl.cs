@@ -5,7 +5,7 @@ using UnityEngine;
 public class CarControl : MonoBehaviour
 {
     float speed = 8f;
-    public int rotationSpeed = 500;
+    float rotationSpeed = 500;
 
     // Start is called before the first frame update
     void Start()
@@ -18,13 +18,14 @@ public class CarControl : MonoBehaviour
     {
         Vector3 move = new Vector3(Input.GetAxis("Horizontal"),
 			Input.GetAxis("Vertical"),0);
+		
 
 
 		// Update the ships position each frame
 		transform.position += move * speed * Time.deltaTime;
 
 		if(move != Vector3.zero) {
-		    Quaternion toRotation = Quaternion.LookRotation(Vector3.forward, move);
+		    Quaternion toRotation = Quaternion.LookRotation(Vector3.forward, move*Time.deltaTime*speed);
 		    transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed*Time.deltaTime);
 		}
     }
