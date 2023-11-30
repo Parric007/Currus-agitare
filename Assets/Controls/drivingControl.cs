@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class CarControl : MonoBehaviour
 {
-    float speed = 8f;
-    float rotationSpeed = 500;
+    float movementSpeed = 2f;
+    float rotationSpeed = 300;
 
     // Start is called before the first frame update
     void Start()
@@ -16,17 +16,26 @@ public class CarControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 move = new Vector3(Input.GetAxis("Horizontal"),
-			Input.GetAxis("Vertical"),0);
-		
+        
+        if(Input.GetKey(KeyCode.W)) {
+			transform.position += transform.up * Time.deltaTime * movementSpeed;
+		}
+		else if(Input.GetKey(KeyCode.S)) {
+            transform.position -= transform.up * Time.deltaTime * movementSpeed/2;
+		}
+	
 
-
-		// Update the ships position each frame
-		transform.position += move * speed * Time.deltaTime;
-
-		if(move != Vector3.zero) {
-		    Quaternion toRotation = Quaternion.LookRotation(Vector3.forward, move*Time.deltaTime*speed);
-		    transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed*Time.deltaTime);
+		if(Input.GetKey(KeyCode.A)) {
+            if(!Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.S)) {
+                transform.position += transform.up * Time.deltaTime * movementSpeed/3;
+            }
+			transform.Rotate(0, 0, Time.deltaTime * rotationSpeed);
+		}
+		else if(Input.GetKey(KeyCode.D)) {
+            if(!Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.S)) {
+                transform.position += transform.up * Time.deltaTime * movementSpeed/3;
+            }
+			transform.Rotate(0, 0, -Time.deltaTime * rotationSpeed);
 		}
     }
 }
