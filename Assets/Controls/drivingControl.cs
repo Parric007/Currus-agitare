@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class CarControl : MonoBehaviour
 {
-    float movementSpeed = 2f;
-    float rotationSpeed = 300;
+    float movementSpeed = 5f;
+    float rotationSpeed = 200f;
 
     // Start is called before the first frame update
     void Start()
@@ -27,13 +27,13 @@ public class CarControl : MonoBehaviour
 
 		if(Input.GetKey(KeyCode.A)) {
             if(!Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.S)) {
-                transform.position += transform.up * Time.deltaTime * movementSpeed/3;
+                transform.position += transform.up * Time.deltaTime * movementSpeed;
             }
 			transform.Rotate(0, 0, Time.deltaTime * rotationSpeed);
 		}
 		else if(Input.GetKey(KeyCode.D)) {
             if(!Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.S)) {
-                transform.position += transform.up * Time.deltaTime * movementSpeed/3;
+                transform.position += transform.up * Time.deltaTime * movementSpeed;
             }
 			transform.Rotate(0, 0, -Time.deltaTime * rotationSpeed);
 		}
