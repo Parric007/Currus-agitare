@@ -7,7 +7,7 @@ public class CarControl : MonoBehaviour
     float maxSpeed = 5f;
     float rotationSpeed = 200f;
     public float velocity = 0f;
-    float rotVelocity = 2.5f;
+    //float rotVelocity = 2.5f;
     float acceleration = 0.025f;
     float deceleration = 0.005f;
     float breakingFactor = 0.05f;
