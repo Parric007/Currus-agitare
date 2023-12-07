@@ -9,12 +9,17 @@ public class CarControls : MonoBehaviour
     public float turnFactor = 3.5f;
     public float driftFactor = 0.9f;
     public float maxSpeed = 5f;
+    public float bouncyness = 10f;
+    
 
     //LocalVariables
     float accelerationInput = 0;
     float steeringInput = 0;
     float rotationAngle = 0;
     float velocityVsUp = 0;
+    float bouncynessWall = 3f;
+    Vector2 newVelocity = new Vector2(0,1);
+    
 
     Rigidbody2D carRigidbody2D;
 
@@ -35,6 +40,18 @@ public class CarControls : MonoBehaviour
     }
 
     void FixedUpdate() {
+        RaycastHit2D hit = Physics2D.Raycast(carRigidbody2D.position,carRigidbody2D.velocity, carRigidbody2D.velocity.magnitude);
+        if(hit) {
+            if(hit.collider.tag == "WorldBorder") {
+                newVelocity = Vector2.Reflect(carRigidbody2D.velocity, hit.normal)*bouncynessWall;
+                //Debug.Log(Vector2.Reflect(carRigidbody2D.velocity, hit.normal));               
+            } else {
+                newVelocity = Vector2.Reflect(carRigidbody2D.velocity,hit.normal)*2;
+            }
+        } else {
+            newVelocity = carRigidbody2D.velocity;
+        }
+        
         ApplyEngineForce();
         KillOrthogonalVelocity();
         ApplySteering();
@@ -105,4 +122,14 @@ public class CarControls : MonoBehaviour
         accelerationInput = inputVector.y;
     }
 
+    void OnCollisionEnter2D() {
+        //print(carRigidbody2D.velocity);
+        if(newVelocity.magnitude > maxSpeed) {
+            newVelocity = newVelocity * (1/newVelocity.magnitude) * maxSpeed;
+        }
+        if(newVelocity.magnitude < -maxSpeed/2) {
+            newVelocity = newVelocity * -(1/newVelocity.magnitude) * maxSpeed/2;
+        }
+        carRigidbody2D.velocity = newVelocity;
+    }
 }
