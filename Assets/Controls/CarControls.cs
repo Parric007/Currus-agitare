@@ -5,11 +5,11 @@ using UnityEngine;
 public class CarControls : MonoBehaviour
 {
     [Header("Car settings")]
-    public float accelerationFactor = 30.0f;
-    public float turnFactor = 3.5f;
-    public float driftFactor = 0.9f;
-    public float maxSpeed = 5f;
-    public float bouncyness = 10f;
+    float accelerationFactor = 1f;
+    float turnFactor = 5f;
+    float driftFactor = 0.85f;
+    float maxSpeed = 2f;
+    float bouncyness = 10f;
     
 
     //LocalVariables
