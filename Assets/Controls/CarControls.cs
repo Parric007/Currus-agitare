@@ -5,10 +5,10 @@ using UnityEngine;
 public class CarControls : MonoBehaviour
 {
     [Header("Car settings")]
-    float accelerationFactor = 1f;
-    float turnFactor = 5f;
+    float accelerationFactor = 2f;
+    float turnFactor = 3f;
     float driftFactor = 0.85f;
-    float maxSpeed = 2f;
+    float maxSpeed = 7f;
     float bouncyness = 10f;
     
 
@@ -46,7 +46,7 @@ public class CarControls : MonoBehaviour
                 newVelocity = Vector2.Reflect(carRigidbody2D.velocity, hit.normal)*bouncynessWall;
                 //Debug.Log(Vector2.Reflect(carRigidbody2D.velocity, hit.normal));               
             } else {
-                newVelocity = Vector2.Reflect(carRigidbody2D.velocity,hit.normal)*2;
+                newVelocity = Vector2.Reflect(carRigidbody2D.velocity,hit.normal)*bouncyness;
             }
         } else {
             newVelocity = carRigidbody2D.velocity;
