@@ -6,6 +6,7 @@ TagManager:
   tags:
   - WorldBorder
   - NPC-Car
+  - Checkpoint
   layers:
   - Default
   - TransparentFX
