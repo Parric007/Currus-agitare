@@ -8,8 +8,8 @@ public class CarControls : MonoBehaviour
     float accelerationFactor = 2f;
     float turnFactor = 3f;
     float driftFactor = 0.85f;
-    float maxSpeed = 7f;
-    float bouncyness = 10f;
+    public float maxSpeed = 7f;
+    float bouncyness = 1f;
     
 
     //LocalVariables
