@@ -122,7 +122,7 @@ public class CarControls : MonoBehaviour
         accelerationInput = inputVector.y;
     }
 
-    void OnCollisionEnter2D() {
+    /**void OnCollisionEnter2D() {
         //print(carRigidbody2D.velocity);
         if(newVelocity.magnitude > maxSpeed) {
             newVelocity = newVelocity * (1/newVelocity.magnitude) * maxSpeed;
@@ -132,4 +132,5 @@ public class CarControls : MonoBehaviour
         }
         carRigidbody2D.velocity = newVelocity;
     }
+    */
 }
