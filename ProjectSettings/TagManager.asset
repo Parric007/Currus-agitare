@@ -8,6 +8,7 @@ TagManager:
   - NPC-Car
   - Checkpoint
   - Goal
+  - OptionenMenu
   layers:
   - Default
   - TransparentFX
@@ -15,7 +16,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - OptionenMenu
   - 
   - 
   - 
