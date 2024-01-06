@@ -10,14 +10,8 @@ public class Start_Handling : MonoBehaviour
     public GameObject Start_Menu;
     public GameObject Option_Menu;
     // Start is called before the first frame update
-    void Start()
-    {
-<<<<<<< HEAD:Assets/Scenes/Jonas/Start_Handling.cs
-=======
-        //SceneManager.LoadScene(Sample_Scene);
->>>>>>> af74ae9839c3f4b1bc0c415be1a2f811bf87d75c:Assets/Scenes/Start_Handling.cs
-        //PlayStartButton();
-    }
+    void Start() { }
+    
 
     public void PlayStartButton()
     {
