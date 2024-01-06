@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
+using UnityEditor.UI;
 
 public class Start_Handling : MonoBehaviour
 {
@@ -10,17 +12,18 @@ public class Start_Handling : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        PlayStartButton();
+        //PlayStartButton();
     }
 
     public void PlayStartButton()
     {
-        SceneManager.LoadScene("Sample_Scene");
+        SceneManager.LoadScene("SampleScene");
     }
 
     public void QuitButton()
     {
         Application.Quit();
+        Debug.Log("Quit");
     }
 
     public void OptionenButton()
