@@ -19,7 +19,7 @@ public class CarInput : MonoBehaviour
 
     void Awake() {
         carController = GetComponent<CarControls>();
-        timecontroller = transform.GetChild(2).transform.GetChild(0).transform.GetChild(0).transform.GetComponent<TimeStopping>();
+        timecontroller = transform.GetChild(2).transform.GetChild(0).transform.GetComponent<TimeStopping>();
         allWaypoints = FindObjectsOfType<Waypoint>();
         goalGO = GameObject.FindGameObjectsWithTag("Goal");
         cpToReach = (int) (allWaypoints.Length/2)+1;

@@ -10,12 +10,13 @@ public class Start_Handling : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        PlayStartButton();
+        //SceneManager.LoadScene(Sample_Scene);
+        //PlayStartButton();
     }
 
     public void PlayStartButton()
     {
-        SceneManager.LoadScene("Sample_Scene");
+        SceneManager.LoadScene("SampleScene");
     }
 
     public void QuitButton()
