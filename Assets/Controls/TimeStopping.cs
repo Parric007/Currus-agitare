@@ -5,7 +5,6 @@ using TMPro;
 
 public class TimeStopping : MonoBehaviour
 {
-
     public class TimeVal {
         public int passedMinutes;
         public float passedSeconds;
@@ -41,6 +40,7 @@ public class TimeStopping : MonoBehaviour
         }
     }
 
+    IDataService dataService = new JsonDataService();
     TimeVal passedTime = new TimeVal(0,0f);
     TimeVal fastestTime;
     List<string> pastLaps = new List<string>();
@@ -58,10 +58,9 @@ public class TimeStopping : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        fastestTime = new TimeVal(0,0f);
+        fastestTime = dataService.LoadData<TimeVal>("/fastestTime.json", false);
         passedLapsText.text = "";
-        fastestTimeText.text = "";
-        updateFastestTime();
+        fastestTimeText.text = "Schnellste Runde: " + fastestTime.toString();
     }
 
     // Update is called once per frame
@@ -92,5 +91,14 @@ public class TimeStopping : MonoBehaviour
     }
     void updateFastestTime() {
         fastestTimeText.text = "Schnellste Runde: " + fastestTime.toString();
+        serializeJson();
+    }
+
+    public void serializeJson() {
+        if (dataService.SaveData("/fastestTime.json", fastestTime, false)) {
+            //Debug.Log("Succes");
+        } else {
+            Debug.LogError("AHH");
+        }
     }
 }
