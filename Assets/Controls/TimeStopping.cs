@@ -98,7 +98,13 @@ public class TimeStopping : MonoBehaviour
     void Start()
     {
         //top3Times = new MultipleTimes(new TimeVal(4,0f), new TimeVal(5,0f), new TimeVal(6,0f));
-        top3Times = dataService.LoadData<MultipleTimes>("/top3Times.json", false);
+        try {
+            top3Times = dataService.LoadData<MultipleTimes>("/top3Times.json", false);
+        }           
+        catch {
+            top3Times = new MultipleTimes(new TimeVal(4,0f), new TimeVal(5,0f), new TimeVal(6,0f));
+        }
+        
         fastestTime = top3Times.getFirst();//dataService.LoadData<TimeVal>("/fastestTime.json", false);
         passedLapsText.text = "";
         fastestTimeText.text = "Schnellste Runde: " + fastestTime.toString();
