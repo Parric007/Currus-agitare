@@ -90,7 +90,7 @@ public class TimeStopping : MonoBehaviour
         pastLaps.Add(newText);
         passedLapsText.text = newText;
     }
-    void updateFastestTime() {
+    public void  updateFastestTime() {
         fastestTimeText.text = "Schnellste Runde: " + fastestTime.toString();
     }
 }

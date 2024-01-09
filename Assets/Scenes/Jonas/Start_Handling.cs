@@ -31,6 +31,8 @@ public class Start_Handling : MonoBehaviour
     {
         Menu.SetActive(false);
         Optionen.SetActive(true);
+        //TimeStopping.
+
     }
     // Update is called once per frame
     void Update()

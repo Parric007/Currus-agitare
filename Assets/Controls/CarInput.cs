@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
+using UnityEditor.UI;
+using JetBrains.Annotations;
 
 public class CarInput : MonoBehaviour
 {
@@ -14,6 +18,7 @@ public class CarInput : MonoBehaviour
     TimeStopping timecontroller;
     CarControls carController;
     GameObject[] goalGO;
+    public GameObject Menu;
     Waypoint currentWaypoint = null;
     Waypoint[] allWaypoints;
 
@@ -22,8 +27,43 @@ public class CarInput : MonoBehaviour
         timecontroller = transform.GetChild(2).transform.GetChild(0).transform.GetComponent<TimeStopping>();
         allWaypoints = FindObjectsOfType<Waypoint>();
         goalGO = GameObject.FindGameObjectsWithTag("Goal");
-        cpToReach = (int) (allWaypoints.Length/2)+1;
+        cpToReach = (int)(allWaypoints.Length / 2) + 1;
     }
+    /*
+    private void Start()
+    {
+        Menu.SetActive(false);
+    }
+    */
+    void Update()
+    {
+        
+        
+        bool activeMenu = false;
+
+        if(Input.GetKeyDown(KeyCode.M) && activeMenu == false)
+            {
+            Time.timeScale = 0;
+            activeMenu = true;
+            Menu.SetActive(true);
+        }
+
+        if(activeMenu)
+        {
+            if(Input.GetKeyDown(KeyCode.M))
+            {
+                activeMenu = false;
+                Menu.SetActive(false);
+                Time.timeScale = 1;
+            }
+        }
+        if(Input.GetKeyDown(KeyCode.N))
+        {
+            Time.timeScale = 1;
+            Menu.SetActive(true);
+        }
+    }
+
 
 
     // Update is called once per frame
@@ -31,12 +71,37 @@ public class CarInput : MonoBehaviour
     {
         Vector2 inputVector = Vector2.zero;
 
+        //int activeMenu = 0;
+        //GameObject Menu;
+
         inputVector.x = Input.GetAxis("Horizontal");
         inputVector.y = Input.GetAxis("Vertical");
 
         carController.SetInputVector(inputVector);
 
-        if(currentWaypoint == null) {
+        /*if (Input.GetKeyDown(KeyCode.M))
+        {
+            Time.timeScale = 0;
+        }*/
+
+        /*if (Input.GetKeyDown(KeyCode.M) && activeMenu == 0)
+        {
+            Time.timeScale = 0;
+            activeMenu = 1;
+            //Menu.SetActive(true);
+
+        }
+
+        //if(activeMenu == 1)
+        //{
+        if (Input.GetKeyDown(KeyCode.N))
+        {
+
+            Time.timeScale = 1;
+        }
+
+        } */
+        if (currentWaypoint == null) {
             currentWaypoint = FindClosestWaypoint();
         }
 
