@@ -26,7 +26,12 @@ public class TimeStopping : MonoBehaviour
             
         }
         public static bool operator <(TimeVal current, TimeVal other) {
-            return current.passedMinutes<=other.passedMinutes && current.passedSeconds<other.passedSeconds;
+            if(current.passedMinutes<other.passedMinutes) {
+                return true;
+            } else if(current.passedMinutes==other.passedMinutes) {
+                return current.passedSeconds<other.passedSeconds;
+            }
+            return false;
         }
         public static bool operator >(TimeVal current, TimeVal other) {
             return current.passedMinutes>=other.passedMinutes && current.passedSeconds>other.passedSeconds;
@@ -39,9 +44,43 @@ public class TimeStopping : MonoBehaviour
             passedSeconds = 0;
         }
     }
+    public class MultipleTimes {
+        public TimeVal first;
+        public TimeVal second;
+        public TimeVal third;
+
+        public MultipleTimes(TimeVal _first, TimeVal _second, TimeVal _third) {
+            first = _first;
+            second = _second;
+            third = _third;
+        }
+
+        public bool checkTime(TimeVal toCheck) {
+            //Debug.Log(toCheck.toString());
+            //Debug.Log(first.toString());
+            if(toCheck < first) {
+                third = second;
+                second = first;
+                first = toCheck;
+                return true;
+            }else if(toCheck < second) {
+                third = second;
+                second = toCheck;
+                return false;
+            } else if(toCheck < third) {
+                third = toCheck;
+                return false;
+            }
+            return false;
+        }
+        public TimeVal getFirst() {
+            return first;
+        }
+    }
 
     IDataService dataService = new JsonDataService();
     TimeVal passedTime = new TimeVal(0,0f);
+    MultipleTimes top3Times;
     TimeVal fastestTime;
     List<string> pastLaps = new List<string>();
     
@@ -51,14 +90,16 @@ public class TimeStopping : MonoBehaviour
     public TMP_Text fastestTimeText;
 
     void Awake() {
-        //currentTimeText = GetComponent<TextMeshPro>();
+        
     }
 
 
     // Start is called before the first frame update
     void Start()
     {
-        fastestTime = dataService.LoadData<TimeVal>("/fastestTime.json", false);
+        //top3Times = new MultipleTimes(new TimeVal(4,0f), new TimeVal(5,0f), new TimeVal(6,0f));
+        top3Times = dataService.LoadData<MultipleTimes>("/top3Times.json", false);
+        fastestTime = top3Times.getFirst();//dataService.LoadData<TimeVal>("/fastestTime.json", false);
         passedLapsText.text = "";
         fastestTimeText.text = "Schnellste Runde: " + fastestTime.toString();
     }
@@ -68,34 +109,25 @@ public class TimeStopping : MonoBehaviour
     {
         passedTime += Time.deltaTime;
         string addText = passedTime.toString();
-        //foreach(string str in pastLaps) {
-        //    addText += str;
-
         currentTimeText.text = addText;
 
     }
 
     public void resetLapTime(int lapcnt) {
         string newText = "\n Lap " + lapcnt.ToString() + ": " + passedTime.toString();
+        //top3Times = dataService.LoadData<MultipleTimes>("/top3Times.json", false);
 
-        if (passedTime < fastestTime) {
+        if (top3Times.checkTime(passedTime)) {
             fastestTime = passedTime;
-            updateFastestTime();
+            fastestTimeText.text = "Schnellste Runde: " + fastestTime.toString();
         }
-        passedTime.reset();
-        foreach(string str in pastLaps) {
-            newText += str;
-        }
-        pastLaps.Add(newText);
-        passedLapsText.text = newText;
-    }
-    void updateFastestTime() {
-        fastestTimeText.text = "Schnellste Runde: " + fastestTime.toString();
         serializeJson();
+        passedLapsText.text += newText;
+        passedTime.reset();
     }
 
     public void serializeJson() {
-        if (dataService.SaveData("/fastestTime.json", fastestTime, false)) {
+        if (dataService.SaveData("/top3Times.json", top3Times, false)) {
             //Debug.Log("Succes");
         } else {
             Debug.LogError("AHH");
