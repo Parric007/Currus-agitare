@@ -29,38 +29,16 @@ public class CarInput : MonoBehaviour
         goalGO = GameObject.FindGameObjectsWithTag("Goal");
         cpToReach = (int)(allWaypoints.Length / 2) + 1;
     }
-    /*
-    private void Start()
-    {
-        Menu.SetActive(false);
-    }
-    */
     void Update()
     {
-        
-        
-        bool activeMenu = false;
-
-        if(Input.GetKeyDown(KeyCode.M) && activeMenu == false)
-            {
-            Time.timeScale = 0;
-            activeMenu = true;
-            Menu.SetActive(true);
-        }
-
-        if(activeMenu)
-        {
-            if(Input.GetKeyDown(KeyCode.M))
-            {
-                activeMenu = false;
-                Menu.SetActive(false);
+        if(Input.GetKeyDown(KeyCode.M)) {
+            if(Menu.activeInHierarchy) {
                 Time.timeScale = 1;
+                Menu.SetActive(false);
+            } else {
+                Time.timeScale = 0;
+                Menu.SetActive(true);
             }
-        }
-        if(Input.GetKeyDown(KeyCode.N))
-        {
-            Time.timeScale = 1;
-            Menu.SetActive(true);
         }
     }
 
@@ -71,36 +49,11 @@ public class CarInput : MonoBehaviour
     {
         Vector2 inputVector = Vector2.zero;
 
-        //int activeMenu = 0;
-        //GameObject Menu;
-
         inputVector.x = Input.GetAxis("Horizontal");
         inputVector.y = Input.GetAxis("Vertical");
 
         carController.SetInputVector(inputVector);
 
-        /*if (Input.GetKeyDown(KeyCode.M))
-        {
-            Time.timeScale = 0;
-        }*/
-
-        /*if (Input.GetKeyDown(KeyCode.M) && activeMenu == 0)
-        {
-            Time.timeScale = 0;
-            activeMenu = 1;
-            //Menu.SetActive(true);
-
-        }
-
-        //if(activeMenu == 1)
-        //{
-        if (Input.GetKeyDown(KeyCode.N))
-        {
-
-            Time.timeScale = 1;
-        }
-
-        } */
         if (currentWaypoint == null) {
             currentWaypoint = FindClosestWaypoint();
         }
