@@ -268,6 +268,7 @@ GameObject:
   - component: {fileID: 89114291}
   - component: {fileID: 89114290}
   - component: {fileID: 89114289}
+  - component: {fileID: 89114292}
   m_Layer: 6
   m_Name: AutoAuswahl
   m_TagString: Untagged
@@ -353,10 +354,16 @@ MonoBehaviour:
       m_Image: {fileID: 21300000, guid: 403cd62d15a02eb4f95789e03097417b, type: 3}
     - m_Text: Gabelstabler
       m_Image: {fileID: 21300000, guid: 2e9ec04689dda7546ad03789f2d072fa, type: 3}
+    - m_Text: Gabelstabler
+      m_Image: {fileID: 21300000, guid: 2e9ec04689dda7546ad03789f2d072fa, type: 3}
+    - m_Text: Traktor
+      m_Image: {fileID: 21300000, guid: 5dc9727e57e9b7a4a8236d14b666c372, type: 3}
+    - m_Text: Rennauto
+      m_Image: {fileID: 21300000, guid: 5ef48742fa655b845a48679d927de581, type: 3}
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11500000, guid: fda14ed0552be5741843ce70fddbad10, type: 3}
+      - m_Target: {fileID: 89114292}
         m_TargetAssemblyTypeName: 
         m_MethodName: 
         m_Mode: 1
@@ -407,6 +414,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 89114287}
   m_CullTransparentMesh: 1
+--- !u!114 &89114292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 89114287}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fda14ed0552be5741843ce70fddbad10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Menu: {fileID: 0}
+  Optionen: {fileID: 0}
+  carOption: 4
 --- !u!1 &91257521
 GameObject:
   m_ObjectHideFlags: 0
