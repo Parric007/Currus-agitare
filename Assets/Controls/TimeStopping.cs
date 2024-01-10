@@ -80,6 +80,7 @@ public class TimeStopping : MonoBehaviour
 
     IDataService dataService = new JsonDataService();
     TimeVal passedTime = new TimeVal(0,0f);
+    TimeVal totalTime = new TimeVal(0,0f);
     MultipleTimes top3Times;
     TimeVal fastestTime;
     List<string> pastLaps = new List<string>();
@@ -88,6 +89,7 @@ public class TimeStopping : MonoBehaviour
     public TMP_Text currentTimeText;
     public TMP_Text passedLapsText;
     public TMP_Text fastestTimeText;
+    public TMP_Text totalTimeText;
 
     void Awake() {
         
@@ -106,26 +108,24 @@ public class TimeStopping : MonoBehaviour
         }
         
         fastestTime = top3Times.getFirst();//dataService.LoadData<TimeVal>("/fastestTime.json", false);
-        passedLapsText.text = "";
-        fastestTimeText.text = "Schnellste Runde: " + fastestTime.toString();
+        fastestTimeText.text = fastestTime.toString();
     }
 
     // Update is called once per frame
     void Update()
     {
-        passedTime += Time.deltaTime;
-        string addText = passedTime.toString();
-        currentTimeText.text = addText;
-
+        passedTime += Time.deltaTime; totalTime += Time.deltaTime;
+        currentTimeText.text = passedTime.toString();
+        totalTimeText.text = totalTime.toString();
     }
 
     public void resetLapTime(int lapcnt) {
-        string newText = "\n Lap " + lapcnt.ToString() + ": " + passedTime.toString();
+        string newText = $"Runde {lapcnt.ToString()}: {passedTime.toString()} \n";//"\n Lap " + lapcnt.ToString() + ": " + passedTime.toString();
         //top3Times = dataService.LoadData<MultipleTimes>("/top3Times.json", false);
 
         if (top3Times.checkTime(passedTime)) {
             fastestTime = passedTime;
-            fastestTimeText.text = "Schnellste Runde: " + fastestTime.toString();
+            fastestTimeText.text = fastestTime.toString();
         }
         serializeJson();
         passedLapsText.text += newText;

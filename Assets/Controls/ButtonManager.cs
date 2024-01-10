@@ -7,7 +7,6 @@ using TMPro;
 public class ButtonManager : MonoBehaviour
 {
     public GameObject Menu;
-    public TMP_Text ButtonText;
     public TMP_Text steuerText;
     // Start is called before the first frame update
     void Start()
@@ -17,12 +16,11 @@ public class ButtonManager : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.M)) {
+        if(Input.GetKeyDown(KeyCode.Escape)) {
             if(Menu.activeInHierarchy) {
                 Time.timeScale = 1;
                 Menu.SetActive(false);
-                ButtonText.gameObject.SetActive(true);
-                steuerText.gameObject.SetActive(true);
+                steuerText.gameObject.SetActive(false);
             }
         }
     }

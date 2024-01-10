@@ -13,6 +13,7 @@ public class CarInput : MonoBehaviour
     int currentWaypointNumber = 0;
     int lapCounter = 0;
     int cpToReach;
+    int roundsToReach = 5;
     TimeStopping timecontroller;
     CarControls carController;
     GameObject[] goalGO;
@@ -20,7 +21,8 @@ public class CarInput : MonoBehaviour
     Waypoint currentWaypoint = null;
     Waypoint[] allWaypoints;
     public GameObject Menu;
-    public TMP_Text ButtonText;
+    public GameObject finishScreen;
+    public GameObject overlay;
     public TMP_Text steuerText;
 
     void Start() {
@@ -47,6 +49,7 @@ public class CarInput : MonoBehaviour
 
 
     void Awake() {
+        Time.timeScale = 1f;
         carController = GetComponent<CarControls>();
         timecontroller = GetComponents<TimeStopping>()[0];
         allWaypoints = FindObjectsOfType<Waypoint>();
@@ -56,12 +59,11 @@ public class CarInput : MonoBehaviour
     
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.M)) {
+        if(Input.GetKeyDown(KeyCode.Escape)) {
             if(!Menu.activeInHierarchy) {
                 Time.timeScale = 0;
                 Menu.SetActive(true);
-                ButtonText.gameObject.SetActive(false);
-                steuerText.gameObject.SetActive(false);
+                steuerText.gameObject.SetActive(true);
             } 
         }
     }
@@ -93,9 +95,13 @@ public class CarInput : MonoBehaviour
             if(currentWaypointNumber%cpToReach == 0) {
                     foreach(GameObject go in goalGO) {
                         if((go.transform.position - transform.position).magnitude <= 2) {
-                            lapCounter++; //Goal reached
-                            currentWaypointNumber = 1;
-                            timecontroller.resetLapTime(lapCounter);
+                            lapCounter++;
+                            if(lapCounter == roundsToReach) {
+                                finishGame();
+                            } else {
+                                currentWaypointNumber = 1;
+                                timecontroller.resetLapTime(lapCounter);
+                            }
                             return;
                         }
                     }    
@@ -105,5 +111,12 @@ public class CarInput : MonoBehaviour
 
     Waypoint FindClosestWaypoint() {
         return allWaypoints.OrderBy(t =>Vector3.Distance(transform.position, t.transform.position)).FirstOrDefault();
+    }
+
+    void finishGame() {
+        overlay.SetActive(false);
+        finishScreen.SetActive(true);
+
+
     }
 }
