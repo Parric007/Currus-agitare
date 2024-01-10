@@ -13,6 +13,7 @@ public class CarInput : MonoBehaviour
     int currentWaypointNumber = 0;
     int lapCounter = 0;
     int cpToReach;
+    int test = 0;
     TimeStopping timecontroller;
     CarControls carController;
     GameObject[] goalGO;
@@ -44,7 +45,9 @@ public class CarInput : MonoBehaviour
 
 
     void selectCar() {
-        PlayerPrefs.SetInt("carSelected", 4); // Hier CANGE
+
+        //test = GetComponent<Start_Handling>();
+        PlayerPrefs.SetInt("carSelected", 3);// Hier CANGE
     }
 
 

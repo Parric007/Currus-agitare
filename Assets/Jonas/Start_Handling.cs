@@ -9,22 +9,34 @@ public class Start_Handling : MonoBehaviour
 {
     public GameObject Menu;
     public GameObject Optionen;
+    public int carOption = 0;
     // Start is called before the first frame update
     void Start() {
         Optionen.SetActive(false);
         Menu.SetActive(true);
     }
-    
+
 
     public void PlayStartButton()
     {
         SceneManager.LoadScene("SampleScene");
     }
 
+    public void carAuswahl(int drop)
+    {
+        carOption = drop;
+    }
+
     public void QuitButton()
     {
         Application.Quit();
         Debug.Log("Quit");
+    }
+
+    public void BackButton()
+    {
+        Menu.SetActive(true);
+        Optionen.SetActive(false);
     }
 
     public void OptionenButton()
