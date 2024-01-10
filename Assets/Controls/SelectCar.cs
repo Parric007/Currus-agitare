@@ -5,19 +5,15 @@ using UnityEngine.UI;
 using UnityEditor.UI;
 public class SelectCar : MonoBehaviour
 {
-    public GameObject dropDownGo;
-    TMPro.TMP_Dropdown[] dropdown;
+    TMPro.TMP_Dropdown dropdown;
     
     public void Start()
     {
-        TMPro.TMP_Dropdown[] dropdown = GetComponentsInChildren<TMPro.TMP_Dropdown>();
-        //dropdown = ddList[0];
-        Debug.Log(dropdown);
+        TMPro.TMP_Dropdown[] ddList = GetComponentsInChildren<TMPro.TMP_Dropdown>();
+        dropdown = ddList[0];        
     }
-    public void carAuswahl(int drop)
+    public void carSelection()
     {
-        //PlayerPrefs.SetInt("carSelected", drop + 1);
-        //PlayerPrefs.SetInt("carSelected", ddList.);
-        //carOption = drop;
+        PlayerPrefs.SetInt("carSelected", dropdown.value + 1);
     }
 }
