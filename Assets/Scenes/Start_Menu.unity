@@ -354,8 +354,6 @@ MonoBehaviour:
       m_Image: {fileID: 21300000, guid: 403cd62d15a02eb4f95789e03097417b, type: 3}
     - m_Text: Gabelstabler
       m_Image: {fileID: 21300000, guid: 2e9ec04689dda7546ad03789f2d072fa, type: 3}
-    - m_Text: Gabelstabler
-      m_Image: {fileID: 21300000, guid: 2e9ec04689dda7546ad03789f2d072fa, type: 3}
     - m_Text: Traktor
       m_Image: {fileID: 21300000, guid: 5dc9727e57e9b7a4a8236d14b666c372, type: 3}
     - m_Text: Rennauto
@@ -364,12 +362,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 89114292}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
+        m_TargetAssemblyTypeName: Start_Handling, Assembly-CSharp
+        m_MethodName: carAuswahl
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -421,7 +419,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 89114287}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fda14ed0552be5741843ce70fddbad10, type: 3}
   m_Name: 
@@ -429,6 +427,8 @@ MonoBehaviour:
   Menu: {fileID: 0}
   Optionen: {fileID: 0}
   carOption: 4
+  dropDownGo: {fileID: 89114287}
+  dropdown: {fileID: 0}
 --- !u!1 &91257521
 GameObject:
   m_ObjectHideFlags: 0
@@ -2773,6 +2773,8 @@ MonoBehaviour:
   Menu: {fileID: 534050279}
   Optionen: {fileID: 1004314358}
   carOption: 0
+  dropDownGo: {fileID: 89114287}
+  dropdown: {fileID: 0}
 --- !u!1 &1671346199
 GameObject:
   m_ObjectHideFlags: 0

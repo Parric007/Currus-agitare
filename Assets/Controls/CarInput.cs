@@ -44,13 +44,6 @@ public class CarInput : MonoBehaviour
 
 
 
-    void selectCar() {
-
-        //test = GetComponent<Start_Handling>();
-        PlayerPrefs.SetInt("carSelected", 3);// Hier CANGE
-    }
-
-
     void Awake() {
         carController = GetComponent<CarControls>();
         timecontroller = transform.GetChild(0).transform.GetChild(0).transform.GetComponent<TimeStopping>();
