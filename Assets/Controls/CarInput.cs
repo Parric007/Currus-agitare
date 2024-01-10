@@ -42,7 +42,21 @@ public class CarInput : MonoBehaviour
         }
     }
 
+    public void PlayButton()
+    {
+        Menu.SetActive(false);
+        Time.timeScale = 1;
+    }
 
+    public void QuitButton()
+    {
+        Application.Quit(); 
+    }
+
+    public void OptionButton()
+    {
+        SceneManager.LoadScene("Start_Menu");
+    }
 
     // Update is called once per frame
     void FixedUpdate()
