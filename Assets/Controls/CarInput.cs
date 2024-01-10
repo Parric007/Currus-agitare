@@ -44,7 +44,7 @@ public class CarInput : MonoBehaviour
 
 
     void selectCar() {
-        PlayerPrefs.SetInt("carSelected", Zahl zwischen 1 und 4, je nach Auswahl);
+        PlayerPrefs.SetInt("carSelected", 4); // Hier CANGE
     }
 
 
