@@ -10,11 +10,9 @@ using JetBrains.Annotations;
 public class CarInput : MonoBehaviour
 {
 
-    public int currentWaypointNumber = 0;
-    public int lapCounter = 0;
-    public int cpToReach;
-
-
+    int currentWaypointNumber = 0;
+    int lapCounter = 0;
+    int cpToReach;
     TimeStopping timecontroller;
     CarControls carController;
     GameObject[] goalGO;
@@ -22,9 +20,37 @@ public class CarInput : MonoBehaviour
     Waypoint currentWaypoint = null;
     Waypoint[] allWaypoints;
 
+    void Start() {
+        int pref = PlayerPrefs.GetInt("carSelected");
+        switch (pref) {
+            case 1:
+                transform.GetChild(1).gameObject.SetActive(true);
+                break;
+            case 2:
+                transform.GetChild(2).gameObject.SetActive(true);
+                break;
+            case 3:
+                transform.GetChild(3).gameObject.SetActive(true);
+                break;
+            case 4:
+                transform.GetChild(4).gameObject.SetActive(true);
+                break;
+            default:
+                transform.GetChild(1).gameObject.SetActive(true);
+                break;
+        }        
+    }
+
+
+
+    void selectCar() {
+        PlayerPrefs.SetInt("carSelected", Zahl zwischen 1 und 4, je nach Auswahl);
+    }
+
+
     void Awake() {
         carController = GetComponent<CarControls>();
-        timecontroller = transform.GetChild(2).transform.GetChild(0).transform.GetComponent<TimeStopping>();
+        timecontroller = transform.GetChild(0).transform.GetChild(0).transform.GetComponent<TimeStopping>();
         allWaypoints = FindObjectsOfType<Waypoint>();
         goalGO = GameObject.FindGameObjectsWithTag("Goal");
         cpToReach = (int)(allWaypoints.Length / 2) + 1;
