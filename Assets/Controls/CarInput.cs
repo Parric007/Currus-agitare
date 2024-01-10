@@ -4,8 +4,8 @@ using UnityEngine;
 using System.Linq;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
-using UnityEditor.UI;
 using JetBrains.Annotations;
+using TMPro;
 
 public class CarInput : MonoBehaviour
 {
@@ -13,13 +13,15 @@ public class CarInput : MonoBehaviour
     int currentWaypointNumber = 0;
     int lapCounter = 0;
     int cpToReach;
-    int test = 0;
     TimeStopping timecontroller;
     CarControls carController;
     GameObject[] goalGO;
-    public GameObject Menu;
+    
     Waypoint currentWaypoint = null;
     Waypoint[] allWaypoints;
+    public GameObject Menu;
+    public TMP_Text ButtonText;
+    public TMP_Text steuerText;
 
     void Start() {
         int pref = PlayerPrefs.GetInt("carSelected");
@@ -46,39 +48,24 @@ public class CarInput : MonoBehaviour
 
     void Awake() {
         carController = GetComponent<CarControls>();
-        timecontroller = transform.GetChild(0).transform.GetChild(0).transform.GetComponent<TimeStopping>();
+        timecontroller = GetComponents<TimeStopping>()[0];
         allWaypoints = FindObjectsOfType<Waypoint>();
         goalGO = GameObject.FindGameObjectsWithTag("Goal");
         cpToReach = (int)(allWaypoints.Length / 2) + 1;
     }
+    
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.M)) {
-            if(Menu.activeInHierarchy) {
-                Time.timeScale = 1;
-                Menu.SetActive(false);
-            } else {
+            if(!Menu.activeInHierarchy) {
                 Time.timeScale = 0;
                 Menu.SetActive(true);
-            }
+                ButtonText.gameObject.SetActive(false);
+                steuerText.gameObject.SetActive(false);
+            } 
         }
     }
-
-    public void PlayButton()
-    {
-        Menu.SetActive(false);
-        Time.timeScale = 1;
-    }
-
-    public void QuitButton()
-    {
-        Application.Quit(); 
-    }
-
-    public void OptionButton()
-    {
-        SceneManager.LoadScene("Start_Menu");
-    }
+    
 
     // Update is called once per frame
     void FixedUpdate()

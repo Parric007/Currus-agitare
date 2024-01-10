@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
-using UnityEditor.UI;
 using UnityEngine.UI;
 
 public class Start_Handling : MonoBehaviour
