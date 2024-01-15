@@ -7,7 +7,7 @@ using System.Linq;
 public class CarAiHandler : MonoBehaviour
 {
 
-    public enum AIMode { followPlayer, followWaypoints };
+    public enum AIMode { followPlayer, followWaypoints, letPlayerPlay};
     public AIMode aIMode;
 
 
@@ -16,11 +16,16 @@ public class CarAiHandler : MonoBehaviour
     CarControls carControls;
     Waypoint currentWaypoint = null;
     Waypoint[] allWaypoints;
+    List<Waypoint> orderedWaypoints;
+    public int currentWaypointPosition;
+    public float distanceToWaypoint;
     // Start is called before the first frame update
 
     void Awake() {
         carControls = GetComponent<CarControls>();
         allWaypoints = FindObjectsOfType<Waypoint>();
+        //Debug.Log(allWaypoints[0].name);
+        orderedWaypoints = allWaypoints.OrderBy(t => t.name).ToList();
     }
     void Start()
     {
@@ -39,6 +44,9 @@ public class CarAiHandler : MonoBehaviour
             case AIMode.followWaypoints:
                 FollowWaypoint();
                 break;
+            case AIMode.letPlayerPlay:
+                FollowWaypoint();
+                return;
         }
 
         inputVector.x = TurnTowardTarget();
@@ -64,10 +72,11 @@ public class CarAiHandler : MonoBehaviour
         if(currentWaypoint != null) {
             targetPosition = currentWaypoint.transform.position;
 
-            float distanceToWaypoint = (targetPosition - transform.position).magnitude;
+            distanceToWaypoint = (targetPosition - transform.position).magnitude;
             if(distanceToWaypoint <= currentWaypoint.minDistanceToReachWaypoint) {
                 currentWaypoint = currentWaypoint.nextWaypoint[Random.Range(0,currentWaypoint.nextWaypoint.Length)];
             }
+            currentWaypointPosition = (int)(orderedWaypoints.IndexOf(currentWaypoint))/2;
         }
     }
 

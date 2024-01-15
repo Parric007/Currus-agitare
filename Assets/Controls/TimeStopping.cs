@@ -12,7 +12,7 @@ public class TimeStopping : MonoBehaviour
 
         public TimeVal(int minIn, float secIn) {
             if(minIn == 0 && secIn == 0f) {
-                throw new Exception("Zeit gleich Null");
+                //throw new Exception("Zeit gleich Null");
             }
             passedMinutes = minIn;
             passedSeconds = secIn;
@@ -53,10 +53,15 @@ public class TimeStopping : MonoBehaviour
         public TimeVal second;
         public TimeVal third;
 
-        public MultipleTimes(TimeVal _first, TimeVal _second, TimeVal _third) {
+        public MultipleTimes(int _firstMin, float _firstSec, int _secondMin, float _secondSec, int _thirdMin, float _thirdSec) {
+            first = new TimeVal(_firstMin, _firstSec);
+            second = new TimeVal(_secondMin, _secondSec);
+            third = new TimeVal(_thirdMin, _thirdSec);
+            /**
             first = new TimeVal(_first.passedMinutes, _first.passedSeconds);
             second = new TimeVal(_second.passedMinutes, _second.passedSeconds);
             third = new TimeVal(_third.passedMinutes, _third.passedSeconds);
+            */
         }
         public TimeVal getFirst() {
             return first;
@@ -67,11 +72,11 @@ public class TimeStopping : MonoBehaviour
             bol = false;
             if(toCheck < first) {
                 bol = true;
-                return new MultipleTimes(toCheck, first, second);
+                return new MultipleTimes(toCheck.passedMinutes, toCheck.passedSeconds, first.passedMinutes, first.passedSeconds, second.passedMinutes, second.passedSeconds);
             }else if(toCheck < second) {
-                return new MultipleTimes(first, toCheck, second);
+                return new MultipleTimes(first.passedMinutes, first.passedSeconds, toCheck.passedMinutes, toCheck.passedSeconds, second.passedMinutes, second.passedSeconds);
             } else if(toCheck < third) {
-                return new MultipleTimes(first, second, toCheck);
+                return new MultipleTimes(first.passedMinutes, first.passedSeconds, second.passedMinutes, second.passedSeconds, toCheck.passedMinutes, toCheck.passedSeconds);
             }
             return this;
         }
@@ -82,10 +87,10 @@ public class TimeStopping : MonoBehaviour
 
     IDataService dataService = new JsonDataService();
     TimeVal passedTime = new TimeVal(0,0.001f);
-    TimeVal totalTime = new TimeVal(0,0.001f);
+    public TimeVal totalTime = new TimeVal(0,0.001f);
     MultipleTimes top3Times;
-    TimeVal fastestTime;
-    List<string> pastLaps = new List<string>();    
+    public TimeVal fastestTime;
+    public TimeVal fastestLocalTime;  
 
     public TMP_Text currentTimeText;
     public TMP_Text passedLapsText;
@@ -105,9 +110,9 @@ public class TimeStopping : MonoBehaviour
             top3Times = dataService.LoadData<MultipleTimes>("/top3Times.json", false);
         }           
         catch {
-            top3Times = new MultipleTimes(new TimeVal(4,0f), new TimeVal(5,0f), new TimeVal(6,0f));
+            top3Times = new MultipleTimes(4, 0f, 5, 0f, 6, 0f);
         }
-        
+        fastestLocalTime = new TimeVal(5, 0f);
         fastestTime = top3Times.getFirst();//dataService.LoadData<TimeVal>("/fastestTime.json", false);
         fastestTimeText.text = fastestTime.toString();
     }
@@ -130,6 +135,10 @@ public class TimeStopping : MonoBehaviour
         }
         serializeJson();
         passedLapsText.text += newText;
+        if(passedTime < fastestLocalTime) {
+            fastestLocalTime = new TimeVal(passedTime.passedMinutes, passedTime.passedSeconds);
+            
+        }
         passedTime.reset();
     }
 
