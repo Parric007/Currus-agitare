@@ -26,6 +26,7 @@ public class CarAiHandler : MonoBehaviour
         allWaypoints = FindObjectsOfType<Waypoint>();
         //Debug.Log(allWaypoints[0].name);
         orderedWaypoints = allWaypoints.OrderBy(t => t.name).ToList();
+        currentWaypointPosition = 0;
     }
     void Start()
     {
@@ -75,8 +76,8 @@ public class CarAiHandler : MonoBehaviour
             distanceToWaypoint = (targetPosition - transform.position).magnitude;
             if(distanceToWaypoint <= currentWaypoint.minDistanceToReachWaypoint) {
                 currentWaypoint = currentWaypoint.nextWaypoint[Random.Range(0,currentWaypoint.nextWaypoint.Length)];
+                currentWaypointPosition++;
             }
-            currentWaypointPosition = (int)(orderedWaypoints.IndexOf(currentWaypoint))/2;
         }
     }
 

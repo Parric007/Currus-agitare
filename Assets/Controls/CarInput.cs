@@ -13,7 +13,7 @@ public class CarInput : MonoBehaviour
     int currentWaypointNumber = 0;
     int lapCounter = 0;
     int cpToReach;
-    int roundsToReach = 1;
+    public int roundsToReach = 1;
     TimeStopping timecontroller;
     CarControls carController;
     GameObject[] goalGO;
@@ -48,7 +48,13 @@ public class CarInput : MonoBehaviour
             default:
                 transform.GetChild(1).gameObject.SetActive(true);
                 break;
-        }        
+        }
+        try {
+            roundsToReach = PlayerPrefs.GetInt("rounds");  
+        } catch {
+            roundsToReach = 2;
+        }
+              
     }
 
 
@@ -136,7 +142,7 @@ public class CarInput : MonoBehaviour
                 isEnabled = false;
             }     
         }
-        finalPositionText.text += $"{playerRank}. Platz";
+        finalPositionText.text = placementToText();//$"{playerRank}. Platz";
         totalTimeText.text += timecontroller.totalTime.toString();
         bestTimeText.text += timecontroller.fastestLocalTime.toString();
 

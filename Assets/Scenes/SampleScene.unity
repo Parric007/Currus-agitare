@@ -157,8 +157,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -397.56, y: 250}
-  m_SizeDelta: {x: 397.56, y: 48.686}
+  m_AnchoredPosition: {x: -400, y: 300}
+  m_SizeDelta: {x: 400, y: 48.686}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &29244796
 MonoBehaviour:
@@ -1876,8 +1876,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -397.56, y: 48}
-  m_SizeDelta: {x: 397.56, y: 48.686}
+  m_AnchoredPosition: {x: -400, y: -208}
+  m_SizeDelta: {x: 400, y: 48.686}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &349145826
 MonoBehaviour:
@@ -3307,7 +3307,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: bd5531a8eccf4b347a91c42b10bd0455, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 62d06a5a7b659aa46a9e56fd84fb073e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5644,8 +5644,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -397.56, y: -187}
-  m_SizeDelta: {x: 397.56, y: 48.686}
+  m_AnchoredPosition: {x: -400, y: -443.00003}
+  m_SizeDelta: {x: 400, y: 48.686}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1182224294
 MonoBehaviour:
@@ -6555,8 +6555,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 731.3952, y: 264.7}
-  m_SizeDelta: {x: 198.2805, y: 50}
+  m_AnchoredPosition: {x: 704.1007, y: 264.7}
+  m_SizeDelta: {x: 225, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1518069966
 MonoBehaviour:
@@ -9390,6 +9390,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb7530dc756f74f45bea2747b62ccc55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  roundsToReach: 1
   Menu: {fileID: 1754695179}
   finishScreen: {fileID: 1601676205}
   overlay: {fileID: 1635711108}
